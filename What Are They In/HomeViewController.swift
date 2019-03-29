@@ -100,7 +100,10 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {
             action in
             
-            // Save the image to the database
+            // Pass on the image
+            let imageData:NSData = image!.pngData()! as NSData
+            self.sendImage(encodedImage: imageData.base64EncodedString());
+            
             
             self.performSegue(withIdentifier: "toInfoScreen", sender: self)
         }))
@@ -118,4 +121,30 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         super.viewWillDisappear(animated)
         self.captureSession.stopRunning()
     }
+    
+    func sendImage(encodedImage: String) {
+        
+//        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+//        let imageData = image.jpegData(compressionQuality: 1)!
+//        let encodedImage = encodedImage.base64EncodedString()
+        
+        let url = URL(string: "http://www.site.whatever/image_upload.php")
+        var request = URLRequest(url: url!)
+        let postString = "encoded_image=\(encodedImage)"
+        let postData = postString.data(using: String.Encoding.utf8)
+        request.httpMethod = "POST"
+        request.httpBody = postData
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        let task = URLSession.shared.dataTask(with: request) {
+            data, response, error in
+            if error != nil {
+                // Handle error
+                return
+            }
+            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+            print(responseString as Any)
+        }
+        task.resume()
+    }
+
 }
