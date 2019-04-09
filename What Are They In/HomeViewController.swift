@@ -23,6 +23,9 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        UserDefaults.standard.set("Brandon", forKey: "recentOne")
+        UserDefaults.standard.set("Matt", forKey: "recentTwo")
+        
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .medium
         
