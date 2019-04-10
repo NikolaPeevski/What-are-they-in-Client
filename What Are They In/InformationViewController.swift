@@ -10,11 +10,8 @@ import UIKit
 
 class InformationViewController: UIViewController {
 
-    @IBOutlet weak var currActorLabel: UILabel!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        currActorLabel.text = actorName
+
     }
 }
