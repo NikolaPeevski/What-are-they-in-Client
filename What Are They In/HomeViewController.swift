@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Foundation
 
 class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
 
@@ -131,21 +132,28 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
 //        let imageData = image.jpegData(compressionQuality: 1)!
 //        let encodedImage = encodedImage.base64EncodedString()
         
-        let url = URL(string: "http://www.site.whatever/image_upload.php")
+        let url = URL(string: "http://169.254.95.115:8080/scan")
         var request = URLRequest(url: url!)
-        let postString = "encoded_image=\(encodedImage)"
-        let postData = postString.data(using: String.Encoding.utf8)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        let json = ["data": encodedImage];
+        
+        let jsonData = try? JSONSerialization.data(withJSONObject: json, options: JSONSerialization.WritingOptions(rawValue: 0))
+        
+        print(JSONSerialization.isValidJSONObject(json))
         request.httpMethod = "POST"
-        request.httpBody = postData
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-        let task = URLSession.shared.dataTask(with: request) {
-            data, response, error in
-            if error != nil {
-                // Handle error
+        request.httpBody = jsonData;
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, error == nil else {
+                print(error?.localizedDescription ?? "No data")
                 return
             }
-            let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-            print(responseString as Any)
+            let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
+            if let responseJSON = responseJSON as? [String: Any] {
+                print(responseJSON)
+            }
         }
         task.resume()
     }
