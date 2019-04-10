@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2E364DF5225BE4F9003A6D0B /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E364DF4225BE4F9003A6D0B /* TableViewController.swift */; };
 		8560196B224C0DEC00B72BB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8560196A224C0DEC00B72BB3 /* AppDelegate.swift */; };
 		85601970224C0DEC00B72BB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8560196E224C0DEC00B72BB3 /* Main.storyboard */; };
 		85601972224C0DED00B72BB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85601971224C0DED00B72BB3 /* Assets.xcassets */; };
@@ -15,6 +14,8 @@
 		8560197D224C0F0600B72BB3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8560197C224C0F0600B72BB3 /* HomeViewController.swift */; };
 		85B50099224D7F5E00A9496D /* InformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B50098224D7F5E00A9496D /* InformationViewController.swift */; };
 		85B500A1224D8AE500A9496D /* What_Are_They_InUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B500A0224D8AE500A9496D /* What_Are_They_InUITests.swift */; };
+		85ED8D6F225C2AC7008BAA78 /* RecentsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED8D6E225C2AC7008BAA78 /* RecentsTableViewController.swift */; };
+		85ED8D71225C2B03008BAA78 /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85ED8D70225C2B03008BAA78 /* RecentCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +29,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2E364DF4225BE4F9003A6D0B /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		85601967224C0DEC00B72BB3 /* What Are They In.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "What Are They In.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8560196A224C0DEC00B72BB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8560196F224C0DEC00B72BB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -40,6 +40,8 @@
 		85B5009E224D8AE400A9496D /* What Are They InUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "What Are They InUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85B500A0224D8AE500A9496D /* What_Are_They_InUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = What_Are_They_InUITests.swift; sourceTree = "<group>"; };
 		85B500A2224D8AE500A9496D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		85ED8D6E225C2AC7008BAA78 /* RecentsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentsTableViewController.swift; sourceTree = "<group>"; };
+		85ED8D70225C2B03008BAA78 /* RecentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,8 +84,9 @@
 			isa = PBXGroup;
 			children = (
 				8560196A224C0DEC00B72BB3 /* AppDelegate.swift */,
-				2E364DF4225BE4F9003A6D0B /* TableViewController.swift */,
 				8560196E224C0DEC00B72BB3 /* Main.storyboard */,
+				85ED8D6E225C2AC7008BAA78 /* RecentsTableViewController.swift */,
+				85ED8D70225C2B03008BAA78 /* RecentCell.swift */,
 				85B50098224D7F5E00A9496D /* InformationViewController.swift */,
 				8560197C224C0F0600B72BB3 /* HomeViewController.swift */,
 				85601971224C0DED00B72BB3 /* Assets.xcassets */,
@@ -203,10 +206,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85ED8D6F225C2AC7008BAA78 /* RecentsTableViewController.swift in Sources */,
 				8560196B224C0DEC00B72BB3 /* AppDelegate.swift in Sources */,
 				8560197D224C0F0600B72BB3 /* HomeViewController.swift in Sources */,
 				85B50099224D7F5E00A9496D /* InformationViewController.swift in Sources */,
-				2E364DF5225BE4F9003A6D0B /* TableViewController.swift in Sources */,
+				85ED8D71225C2B03008BAA78 /* RecentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -369,14 +373,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2HQUEE6SP8;
+				DEVELOPMENT_TEAM = 2SNFN24M22;
 				INFOPLIST_FILE = "What Are They In/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.BANDJ.What-Are-They-In";
+				PRODUCT_BUNDLE_IDENTIFIER = "What-Are-They-In";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -388,14 +392,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2HQUEE6SP8;
+				DEVELOPMENT_TEAM = 2SNFN24M22;
 				INFOPLIST_FILE = "What Are They In/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.BANDJ.What-Are-They-In";
+				PRODUCT_BUNDLE_IDENTIFIER = "What-Are-They-In";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
