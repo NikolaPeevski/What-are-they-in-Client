@@ -21,12 +21,16 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     var stillImageOutput: AVCapturePhotoOutput!
     var videoPreviewLayer: AVCaptureVideoPreviewLayer!
     
-    var count = 1
+    var count = UserDefaults.standard.string(forKey: "count")
+    var oldCount = ""
+    var jsonArray: [String: Any] = [:]
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        count = UserDefaults.standard.integer(forKey: "count")
+        //UserDefaults.standard.set("One", forKey: "count")
+        
+        count = UserDefaults.standard.string(forKey: "count") ?? ""
         
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .medium
@@ -109,6 +113,9 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             let imageData:NSData = image!.pngData()! as NSData
             self.sendImage(encodedImage: imageData.base64EncodedString());
             
+            actorName = UserDefaults.standard.string(forKey: "recent\(String(describing: self.oldCount))") ?? ""
+            
+            print("actorName: \(actorName)")
             
             self.performSegue(withIdentifier: "toInfoScreen", sender: self)
         }))
@@ -153,34 +160,39 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             }
             let responseJSON = try? JSONSerialization.jsonObject(with: data, options: [])
             
-            // Parse responseJSON for the name and the image
+            guard let jsonArray = responseJSON as? [String: Any] else {
+                return
+            }
             
-// This saves the the name into the recents user defaults
-//            if let responseJSON = responseJSON as? [String: Any] {
-//                switch self.count {
-//                case 1:
-//                    UserDefaults.standard.set(responseJSON, forKey: "recentOne")
-//                    self.count += 1
-//                case 2:
-//                    UserDefaults.standard.set(responseJSON, forKey: "recentTwo")
-//                    self.count += 1
-//                case 3:
-//                    UserDefaults.standard.set(responseJSON, forKey: "recentThree")
-//                    self.count += 1
-//                case 4:
-//                    UserDefaults.standard.set(responseJSON, forKey: "recentFour")
-//                    self.count += 1
-//                case 5:
-//                    UserDefaults.standard.set(responseJSON, forKey: "recentFive")
-//                    self.count += 1
-//                default:
-//                    UserDefaults.standard.set(responseJSON, forKey: "recentSix")
-//                    self.count = 1
-//                }
-//
-            
-                print(responseJSON)
-//          }
+            //This saves the the name into the recents user defaults
+            if let responseJSON = responseJSON as? [String: Any] {
+                switch self.count {
+                case "One":
+                    UserDefaults.standard.set(jsonArray["name"]!, forKey: "recentOne")
+                    self.oldCount = "One"
+                    self.count = "Two"
+                case "Two":
+                    UserDefaults.standard.set(jsonArray["name"]!, forKey: "recentTwo")
+                    self.oldCount = "Two"
+                    self.count = "Three"
+                case "Three":
+                    UserDefaults.standard.set(jsonArray["name"]!, forKey: "recentThree")
+                    self.oldCount = "Three"
+                    self.count = "Four"
+                case "Four":
+                    UserDefaults.standard.set(jsonArray["name"]!, forKey: "recentFour")
+                    self.oldCount = "Four"
+                    self.count = "Five"
+                case "Five":
+                    UserDefaults.standard.set(jsonArray["name"]!, forKey: "recentFive")
+                    self.oldCount = "Five"
+                    self.count = "Six"
+                default:
+                    UserDefaults.standard.set(jsonArray["name"]!, forKey: "recentSix")
+                    self.oldCount = "Six"
+                    self.count = "One"
+                }
+            }
         }
         task.resume()
     }
