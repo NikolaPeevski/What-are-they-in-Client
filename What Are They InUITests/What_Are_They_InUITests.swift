@@ -36,14 +36,26 @@ class What_Are_They_InUITests: XCTestCase {
     }
     
     func testUsePicture() {
+        XCUIDevice.shared.orientation = .portrait
         
         let app = XCUIApplication()
         app.buttons["camera"].tap()
         app.alerts["Would you like to use this picture?"].buttons["Yes"].tap()
-        app.buttons["Button"].tap()
+        XCUIDevice.shared.orientation = .faceUp
+        
+        
         
     }
-
+    
+    
+    func testRecents() {
+        
+        let app = XCUIApplication()
+        app.buttons["Recents"].tap()
+        app.tables["Recent Searches"].staticTexts["Recent Searches"].tap()
+        
+    }
+    
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
