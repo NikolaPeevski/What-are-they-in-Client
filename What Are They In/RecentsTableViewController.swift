@@ -67,7 +67,7 @@ class RecentsTableViewController: UITableViewController, RecentCellDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecentCell") as! RecentCell
         cell.setText(name: recents[indexPath.row])
-        cell.delegate = self as? RecentCellDelegate
+        cell.delegate = self as RecentCellDelegate
         
         return cell
     }
