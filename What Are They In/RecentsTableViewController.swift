@@ -14,6 +14,8 @@ class RecentsTableViewController: UITableViewController, RecentCellDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        recents = []
                 
         let recentOne = UserDefaults.standard.string(forKey: "recentOne") ?? ""
         let recentTwo = UserDefaults.standard.string(forKey: "recentTwo") ?? ""
@@ -22,22 +24,22 @@ class RecentsTableViewController: UITableViewController, RecentCellDelegate {
         let recentFive = UserDefaults.standard.string(forKey: "recentFive") ?? ""
         let recentSix = UserDefaults.standard.string(forKey: "recentSix") ?? ""
         
-        if recentOne != "" {
+        if recentOne != "" && !recents.contains(recentOne) {
             recents.append(recentOne)
         }
-        if recentTwo != "" {
+        if recentTwo != "" && !recents.contains(recentTwo){
             recents.append(recentTwo)
         }
-        if recentThree  != "" {
+        if recentThree  != "" && !recents.contains(recentThree) {
             recents.append(recentThree)
         }
-        if recentFour != "" {
+        if recentFour != "" && !recents.contains(recentFour){
             recents.append(recentFour)
         }
-        if recentFive != "" {
+        if recentFive != "" && !recents.contains(recentFive) {
             recents.append(recentFive)
         }
-        if recentSix != "" {
+        if recentSix != "" && !recents.contains(recentSix){
             recents.append(recentSix)
         }
 
