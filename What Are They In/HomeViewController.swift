@@ -30,21 +30,19 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         
         //UserDefaults.standard.set("One", forKey: "count")
         
-        count = UserDefaults.standard.string(forKey: "count") ?? ""
-        
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .medium
-        
+
         guard let backCamera = AVCaptureDevice.default(for: AVMediaType.video)
             else {
                 print("Unable to access back camera!")
                 return
         }
-        
+
         do {
             let input = try AVCaptureDeviceInput(device: backCamera)
             stillImageOutput = AVCapturePhotoOutput()
-            
+
             if captureSession.canAddInput(input) && captureSession.canAddOutput(stillImageOutput) {
                 captureSession.addInput(input)
                 captureSession.addOutput(stillImageOutput)
@@ -74,6 +72,10 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        count = UserDefaults.standard.string(forKey: "count") ?? ""
+    print("count: \(count)")
+    print("oldCount: \(oldCount)")
         
         takenPicture.isHidden = true
         
@@ -113,7 +115,9 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             let imageData:NSData = image!.pngData()! as NSData
             self.sendImage(encodedImage: imageData.base64EncodedString());
             
-            actorName = UserDefaults.standard.string(forKey: "recent\(String(describing: self.oldCount))") ?? ""
+//            actorName = UserDefaults.standard.string(forKey: "recent\(String(describing: self.oldCount))") ?? ""
+            
+            sleep(1)
             
             print("actorName: \(actorName)")
             
@@ -135,12 +139,12 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     
     func sendImage(encodedImage: String) {
-        
+                
 //        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
 //        let imageData = image.jpegData(compressionQuality: 1)!
 //        let encodedImage = encodedImage.base64EncodedString()
         
-        let url = URL(string: "http://10.140.108.252:8080/scan")
+        let url = URL(string: "http://10.141.114.29:8080/scan")
         var request = URLRequest(url: url!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
@@ -154,6 +158,7 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         request.httpBody = jsonData;
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            
             guard let data = data, error == nil else {
                 print(error?.localizedDescription ?? "No data")
                 return
@@ -164,34 +169,41 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                 return
             }
             
+        print(jsonArray["name"] as! String)
+            actorName = jsonArray["name"] as! String
+
             //This saves the the name into the recents user defaults
-            if let responseJSON = responseJSON as? [String: Any] {
-                switch self.count {
+            switch self.count as! String{
                 case "One":
                     UserDefaults.standard.set(jsonArray["name"]!, forKey: "recentOne")
                     self.oldCount = "One"
                     self.count = "Two"
+                    UserDefaults.standard.set(self.count, forKey: "count")
                 case "Two":
                     UserDefaults.standard.set(jsonArray["name"]!, forKey: "recentTwo")
                     self.oldCount = "Two"
                     self.count = "Three"
+                    UserDefaults.standard.set(self.count, forKey: "count")
                 case "Three":
                     UserDefaults.standard.set(jsonArray["name"]!, forKey: "recentThree")
                     self.oldCount = "Three"
                     self.count = "Four"
+                    UserDefaults.standard.set(self.count, forKey: "count")
                 case "Four":
                     UserDefaults.standard.set(jsonArray["name"]!, forKey: "recentFour")
                     self.oldCount = "Four"
                     self.count = "Five"
+                    UserDefaults.standard.set(self.count, forKey: "count")
                 case "Five":
                     UserDefaults.standard.set(jsonArray["name"]!, forKey: "recentFive")
                     self.oldCount = "Five"
                     self.count = "Six"
+                    UserDefaults.standard.set(self.count, forKey: "count")
                 default:
                     UserDefaults.standard.set(jsonArray["name"]!, forKey: "recentSix")
                     self.oldCount = "Six"
                     self.count = "One"
-                }
+                    UserDefaults.standard.set(self.count, forKey: "count")
             }
         }
         task.resume()
