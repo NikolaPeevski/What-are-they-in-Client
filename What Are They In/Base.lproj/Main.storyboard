@@ -49,7 +49,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fuP-Zh-gOM">
-                                <rect key="frame" x="32" y="732" width="78" height="31"/>
+                                <rect key="frame" x="33" y="711" width="78" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Recents">
                                     <attributedString key="attributedTitle">
@@ -93,7 +93,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1079.2" y="137.4384236453202"/>
+            <point key="canvasLocation" x="1078.125" y="137.32394366197184"/>
         </scene>
         <!--Information View Controller-->
         <scene sceneID="WJ8-cC-Flj">
@@ -200,7 +200,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gWZ-wG-A4y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1077.5999999999999" y="944.33497536945822"/>
+            <point key="canvasLocation" x="1078" y="1017"/>
         </scene>
     </scenes>
     <resources>
