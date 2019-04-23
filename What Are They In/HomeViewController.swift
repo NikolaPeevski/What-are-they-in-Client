@@ -144,7 +144,7 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
 //        let imageData = image.jpegData(compressionQuality: 1)!
 //        let encodedImage = encodedImage.base64EncodedString()
         
-        let url = URL(string: "http://10.141.114.29:8080/scan")
+        let url = URL(string: "http://167.99.145.46:8080/scan")
         var request = URLRequest(url: url!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
