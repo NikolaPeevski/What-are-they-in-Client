@@ -10,6 +10,30 @@ import UIKit
 import AVFoundation
 import Foundation
 
+extension UIImage {
+    func rotate(radians: Float) -> UIImage? {
+        var newSize = CGRect(origin: CGPoint.zero, size: self.size).applying(CGAffineTransform(rotationAngle: CGFloat(radians))).size
+        // Trim off the extremely small float value to prevent core graphics from rounding it up
+        newSize.width = floor(newSize.width)
+        newSize.height = floor(newSize.height)
+        
+        UIGraphicsBeginImageContextWithOptions(newSize, false, self.scale)
+        let context = UIGraphicsGetCurrentContext()!
+        
+        // Move origin to middle
+        context.translateBy(x: newSize.width/2, y: newSize.height/2)
+        // Rotate around middle
+        context.rotate(by: CGFloat(radians))
+        // Draw the image at its center
+        self.draw(in: CGRect(x: -self.size.width/2, y: -self.size.height/2, width: self.size.width, height: self.size.height))
+        
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return newImage
+    }
+}
+
 class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
 
     @IBOutlet weak var cameraView: UIView!
@@ -101,7 +125,9 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         guard let imageData = photo.fileDataRepresentation()
             else { return }
         
-        let image = UIImage(data: imageData)
+        
+        var image = UIImage(data: imageData)
+        image = image!.rotate(radians: 2 * .pi)
         takenPicture.image = image
         cameraView.isHidden = true
         takenPicture.isHidden = false
@@ -111,8 +137,11 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: {
             action in
             
+          //  image.transform = CGAffineTransform(rotationAngle: M_PI_2);
             // Pass on the image
             let imageData:NSData = image!.pngData()! as NSData
+            
+            
             self.sendImage(encodedImage: imageData.base64EncodedString());
             
 //            actorName = UserDefaults.standard.string(forKey: "recent\(String(describing: self.oldCount))") ?? ""
@@ -144,7 +173,7 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
 //        let imageData = image.jpegData(compressionQuality: 1)!
 //        let encodedImage = encodedImage.base64EncodedString()
         
-        let url = URL(string: "http://167.99.145.46:8080/scan")
+        let url = URL(string: "http://167.99.145.46:80/scan")
         var request = URLRequest(url: url!)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
