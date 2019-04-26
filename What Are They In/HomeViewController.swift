@@ -10,6 +10,27 @@ import UIKit
 import AVFoundation
 import Foundation
 
+extension UIImageView {
+    func downloaded(from url: URL, contentMode mode: UIView.ContentMode = .scaleAspectFit) {  // for swift 4.2 syntax just use ===> mode: UIView.ContentMode
+        contentMode = mode
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            guard
+                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+                let data = data, error == nil,
+                let image = UIImage(data: data)
+                else { return }
+            DispatchQueue.main.async() {
+                self.image = image
+            }
+            }.resume()
+    }
+    func downloaded(from link: String, contentMode mode: UIView.ContentMode = .scaleAspectFit) {  // for swift 4.2 syntax just use ===> mode: UIView.ContentMode
+        guard let url = URL(string: link) else { return }
+        downloaded(from: url, contentMode: mode)
+    }
+}
+
 extension UIImage {
     func rotate(radians: Float) -> UIImage? {
         var newSize = CGRect(origin: CGPoint.zero, size: self.size).applying(CGAffineTransform(rotationAngle: CGFloat(radians))).size
@@ -34,6 +55,12 @@ extension UIImage {
     }
 }
 
+var actorName = ""
+var birthday = ""
+var imagePath = ""
+var id = ""
+var movies:[String] = []
+
 class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
 
     @IBOutlet weak var cameraView: UIView!
@@ -53,6 +80,8 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         super.viewDidAppear(animated)
         
         //UserDefaults.standard.set("One", forKey: "count")
+        
+        //takenPicture.isHidden = true
         
         captureSession = AVCaptureSession()
         captureSession.sessionPreset = .medium
@@ -146,7 +175,7 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             
 //            actorName = UserDefaults.standard.string(forKey: "recent\(String(describing: self.oldCount))") ?? ""
             
-            sleep(1)
+            sleep(20)
             
             print("actorName: \(actorName)")
             
@@ -162,8 +191,17 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
         self.present(alert, animated: true)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        captureSession.startRunning()
+        cameraView.isHidden = false
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
+        videoPreviewLayer.isHidden = true
+        videoPreviewLayer.isHidden = true
         self.captureSession.stopRunning()
     }
     
@@ -198,9 +236,28 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                 return
             }
             
-        print(jsonArray["name"] as! String)
             actorName = jsonArray["name"] as! String
+            birthday = jsonArray["birthday"] as! String
+            imagePath = jsonArray["profile_path"] as! String
+            id = jsonArray["imdb_id"] as! String
+            let publications = jsonArray["known_for"] as! [[String:Any]]
 
+            movies = []
+            
+            for entries in publications {
+                if (entries["original_title"] != nil) {
+                    movies.append(entries["original_title"] as! String)
+                } else if (entries["original_name"] != nil) {
+                    movies.append(entries["original_name"] as! String)
+                }
+            }
+            
+            var info: [String] = [birthday, imagePath, id]
+            info.append(contentsOf: movies)
+            UserDefaults.standard.set(info, forKey: actorName)
+            
+            // Set these things through the recent table view 
+            
             //This saves the the name into the recents user defaults
             switch self.count as! String{
                 case "One":
