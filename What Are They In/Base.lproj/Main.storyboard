@@ -154,6 +154,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+
                         </subviews>
                         <color key="backgroundColor" red="0.25098039215686274" green="0.58431372549019611" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
