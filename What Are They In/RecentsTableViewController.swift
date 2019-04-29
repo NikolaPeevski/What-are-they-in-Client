@@ -62,6 +62,7 @@ class RecentsTableViewController: UITableViewController, RecentCellDelegate {
     }
     
     func didTapViewActor() {
+        
         performSegue(withIdentifier:"toInfo", sender: self)
     }
     

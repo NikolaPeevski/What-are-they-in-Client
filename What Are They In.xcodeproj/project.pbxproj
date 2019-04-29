@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		855E5DC42272610500C720C2 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855E5DC32272610500C720C2 /* MovieCell.swift */; };
 		8560196B224C0DEC00B72BB3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8560196A224C0DEC00B72BB3 /* AppDelegate.swift */; };
 		85601970224C0DEC00B72BB3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8560196E224C0DEC00B72BB3 /* Main.storyboard */; };
 		85601972224C0DED00B72BB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85601971224C0DED00B72BB3 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		855E5DC32272610500C720C2 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 		85601967224C0DEC00B72BB3 /* What Are They In.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "What Are They In.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8560196A224C0DEC00B72BB3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8560196F224C0DEC00B72BB3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 				8560196E224C0DEC00B72BB3 /* Main.storyboard */,
 				85ED8D6E225C2AC7008BAA78 /* RecentsTableViewController.swift */,
 				85ED8D70225C2B03008BAA78 /* RecentCell.swift */,
+				855E5DC32272610500C720C2 /* MovieCell.swift */,
 				85B50098224D7F5E00A9496D /* InformationViewController.swift */,
 				8560197C224C0F0600B72BB3 /* HomeViewController.swift */,
 				85601971224C0DED00B72BB3 /* Assets.xcassets */,
@@ -206,6 +209,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				855E5DC42272610500C720C2 /* MovieCell.swift in Sources */,
 				85ED8D6F225C2AC7008BAA78 /* RecentsTableViewController.swift in Sources */,
 				8560196B224C0DEC00B72BB3 /* AppDelegate.swift in Sources */,
 				8560197D224C0F0600B72BB3 /* HomeViewController.swift in Sources */,
@@ -374,14 +378,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QZN465CY8M;
+				DEVELOPMENT_TEAM = 2HQUEE6SP8;
 				INFOPLIST_FILE = "What Are They In/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "What-Are-They-In";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.BANDJ.What-Are-They-In";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -395,14 +399,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QZN465CY8M;
+				DEVELOPMENT_TEAM = 2HQUEE6SP8;
 				INFOPLIST_FILE = "What Are They In/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "What-Are-They-In";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.BANDJ.What-Are-They-In";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
