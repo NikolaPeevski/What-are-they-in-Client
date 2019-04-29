@@ -206,10 +206,8 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     
     func sendImage(encodedImage: String) {
-                
-//        let image = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-//        let imageData = image.jpegData(compressionQuality: 1)!
-//        let encodedImage = encodedImage.base64EncodedString()
+        
+        // loading circle
         
         let url = URL(string: "http://167.99.145.46:80/scan")
         var request = URLRequest(url: url!)
@@ -256,8 +254,6 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             info.append(contentsOf: movies)
             UserDefaults.standard.set(info, forKey: actorName)
             
-            // Set these things through the recent table view 
-            
             //This saves the the name into the recents user defaults
             switch self.count as! String{
                 case "One":
@@ -291,6 +287,7 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
                     self.count = "One"
                     UserDefaults.standard.set(self.count, forKey: "count")
             }
+//            completion(<#Void#>);
         }
         task.resume()
     }
