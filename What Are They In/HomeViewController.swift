@@ -176,8 +176,23 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
 //            actorName = UserDefaults.standard.string(forKey: "recent\(String(describing: self.oldCount))") ?? ""
             
             sleep(25)
+            self.dismiss(animated: false, completion: nil)
             
             print("actorName: \(actorName)")
+            
+            if actorName == "" {
+                print("bad picture")
+                
+                let alert = UIAlertController(title: "Faulty Picture", message: "", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Retake", style: .cancel, handler: {
+                    action in
+                    self.cameraView.isHidden = false
+                    self.takenPicture.isHidden = true
+                }))
+                //actorName = jsonArray["name"] as! String
+                self.present(alert, animated: true)
+                
+            }
             
             self.performSegue(withIdentifier: "toInfoScreen", sender: self)
         }))
@@ -206,8 +221,20 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
     }
     
     func sendImage(encodedImage: String) {
+//        let shleep = true;
+//        // loading circle
+//        let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
+//
+//        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+//        loadingIndicator.hidesWhenStopped = true
+//        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+//        loadingIndicator.startAnimating();
+//
+//        alert.view.addSubview(loadingIndicator)
+//        self.present(alert, animated: true, completion: nil)
         
-        // loading circle
+        
+        
         
         let url = URL(string: "http://167.99.145.46:80/scan")
         var request = URLRequest(url: url!)
@@ -235,6 +262,7 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             }
             
             actorName = jsonArray["name"] as! String
+            
             birthday = jsonArray["birthday"] as! String
             imagePath = jsonArray["profile_path"] as! String
             id = jsonArray["imdb_id"] as! String
