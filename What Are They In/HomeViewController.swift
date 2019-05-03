@@ -175,7 +175,7 @@ class HomeViewController: UIViewController, AVCapturePhotoCaptureDelegate {
             
 //            actorName = UserDefaults.standard.string(forKey: "recent\(String(describing: self.oldCount))") ?? ""
             
-            sleep(20)
+            sleep(25)
             
             print("actorName: \(actorName)")
             
